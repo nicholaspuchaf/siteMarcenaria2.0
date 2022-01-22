@@ -1,0 +1,24 @@
+.carousel-control-prev,.carousel-control-next{
+    color: black;
+}
+
+.boxFotos{
+    
+    
+    display: flex;
+    width: 700px;
+    height: 400px;
+    overflow: auto;
+
+
+}
+.boxFotos>img{
+    text-align: center;
+    padding: 10px;
+}
+#titulo{
+    
+}
+.item{
+    margin-bottom: 20px;
+}
