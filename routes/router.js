@@ -30,7 +30,10 @@ router.post('/postItem', bodyParser.json() ,(req,res, next)=>{
     let telefone = body.telefone;
     let email = body.email;
 
-    
+
+    if(!titulo || !descricao || !telefone || !email )res.send("Objeto não postado!");
+    else{
+        
     // let listaItens = itens.retornarTudo();
     // console.log(listaItens);
     itens.adicionarItens(titulo,descricao,listaFotos,telefone,email);
@@ -39,13 +42,53 @@ router.post('/postItem', bodyParser.json() ,(req,res, next)=>{
     
     res.send("Objeto Postado com sucesso!");
 
+    }
+    
 
 })
 
 router.post('/postMultipleItems',bodyParser.json(), (req, res,next)=>{
 
+    let body = req.body //LISTA DE ITENS
+    let listaDeCertos = ""
+    let listaErrados = ""
+
+    for(let i = 0; i<body.length; i++){
+
+        let titulo = body[i].titulo;
+        let descricao = body[i].descricao;
+        let listaFotos = body[i].listaFotos;
+        let telefone = body[i].telefone;
+        let email = body[i].email;
+    
+    
+        if(!titulo || !descricao || !telefone || !email ){
+            
+            //res.send("Objeto não postado!");
+            listaErrados += String(i+1) + ' '
+
+            }
+        else{
+            
+            // let listaItens = itens.retornarTudo();
+            // console.log(listaItens);
+            itens.adicionarItens(titulo,descricao,listaFotos,telefone,email);
+            // listaItens = itens.retornarTudo();
+            // console.log(listaItens);
+            
+            listaDeCertos += String(i+1) + ' '
+    
+        }
 
 
+        
+        
+
+    }
+
+
+    res.send(`Objetos enviados : ${listaDeCertos} Objetos não enviados : ${listaErrados}`);
+        
 
 })
 
